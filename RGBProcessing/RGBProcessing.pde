@@ -36,16 +36,7 @@ void draw() {
       
       background(r,g,b);
       
-      if (r <=15 && g <=15 && b <=15){
-        background(255);
-      } else if (r<b && r<=g && r<23){
-        background(255,0,0);
-      } else if (b<g && b<r && b<20){
-        background(0,255,0);
-      } else if (g<r && g-b<= 8) {
-        background(0,0,255);
-      }
-              dataReceived = false;  
+     
     }
 }
 

@@ -26,9 +26,8 @@ void loop(){
   
   GetColors();                                     
                                                    
-
   if (Red <=15 && Green <=15 && Blue <=15) 
-      Serial.println("White");                    
+      Serial.println("Black");                    
       
   else if (Red<Blue && Red<=Green && Red<23)    
       Serial.println("Red");
