@@ -8,7 +8,7 @@ int blueValue = 0;
 boolean dataReceived = false;
 
 void setup() {
-  fullScreen();
+  size(400, 400);
   
   String[] portList = Serial.list();
 
@@ -34,7 +34,7 @@ void draw() {
 }
 
 void serialEvent(Serial myPort) {
- //valores do arduino
+  // Leitura da linha recebida via Serial
   String inString = myPort.readStringUntil('\n');
   if (inString != null) {
     inString = trim(inString);

@@ -12,13 +12,12 @@ void setup() {
   pinMode(S1, OUTPUT);
   pinMode(S2, OUTPUT);
   pinMode(S3, OUTPUT);
-  pinMode(out, INPUT);
+  pinMode(sensorOut, INPUT);
 
   digitalWrite(S0, HIGH);
   digitalWrite(S1, LOW);
 
   Serial.begin(9600);
-
 
 }
 
