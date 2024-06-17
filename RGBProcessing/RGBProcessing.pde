@@ -1,51 +1,68 @@
 import processing.serial.*;
 
-Serial port;
-int redValue = 0;
-int greenValue = 0;
-int blueValue = 0;
-
+Serial port; 
+int canvasWidth = 400;
+int canvasHeight = 400;
 boolean dataReceived = false;
+int r = 0;
+int g = 0;
+int b = 0;
 
 void setup() {
-  size(400, 400);
+    
+    size(500,500);
 
-  String[] portList = Serial.list();
+   
+    String[] portList = Serial.list();
 
-  if (portList.length > 0) {
-
-    String portName = "COM8";
-
-    port = new Serial(this, portName, 9600);
-  } else {
-    println("Nenhuma porta serial disponível");
-  }
+    
+    if (portList.length > 0) {
+        
+        String portName = "COM8";
+        
+        
+        port = new Serial(this, portName, 9600);
+    } else {
+        println("Nenhuma porta serial disponível");
+    }
 }
 
 void draw() {
-
-  if (dataReceived) {
-    println("Cor recebida: R=" + redValue + ", G=" + greenValue + ", B=" + blueValue);
-
-    background(redValue, greenValue, blueValue);
-  }
-  else {
-    println("valor não recebido");
-  }
+    
+    if (dataReceived) {
+      println("Cor recebida: R=" + r + ", G=" + g + ", B=" + b);
+      
+      background(r,g,b);
+      
+      if (r <=15 && g <=15 && b <=15){
+        background(255);
+      } else if (r<b && r<=g && r<23){
+        background(255,0,0);
+      } else if (b<g && b<r && b<20){
+        background(0,255,0);
+      } else if (g<r && g-b<= 8) {
+        background(0,0,255);
+      }
+              dataReceived = false;  
+    }
 }
 
-void serialEvent(Serial myPort) {
+void serialEvent(Serial p) {
 
-  String inString = myPort.readStringUntil('\n');
-  if (inString != null) {
-    inString = trim(inString);
-    String[] rgbValues = split(inString, ',');
-    if (rgbValues.length == 3) {
-      redValue = int(rgbValues[0]);
-      greenValue = int(rgbValues[1]);
-      blueValue = int(rgbValues[2]);
+    String data = p.readStringUntil('\n');
+    
+    if (data != null) {
       
-      dataReceived = true;
+        data = data.trim();
+        String[] rgb = data.split(",");
+
+        if (rgb.length == 3) {
+          
+            r = int(rgb[0]);
+            g = int(rgb[1]);
+            b = int(rgb[2]);
+
+            dataReceived = true;
+        }
     }
-  }
 }
