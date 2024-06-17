@@ -4,6 +4,7 @@
 #define s3 11
 #define sensorOut 12
 
+//LED RGB para detetar a cor
 #define LED_RED 5
 #define LED_GREEN 6
 #define LED_BLUE 7
